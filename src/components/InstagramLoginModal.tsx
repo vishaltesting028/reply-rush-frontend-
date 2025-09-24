@@ -120,7 +120,7 @@ export default function InstagramLoginModal({ isOpen, onClose, onSuccess }: Inst
           <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
             <p className="text-sm text-blue-800">
               <strong>Note:</strong> Your credentials are securely encrypted and used only for automation features. 
-              We recommend using Instagram's official API for production use.
+              We recommend using Instagram&apos;s official API for production use.
             </p>
           </div>
 

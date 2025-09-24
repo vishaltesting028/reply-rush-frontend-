@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import InstagramMediaDisplay from '../components/InstagramMediaDisplay';
 
 const InstagramTestPage: React.FC = () => {
@@ -6,6 +6,19 @@ const InstagramTestPage: React.FC = () => {
   const [userProfile, setUserProfile] = useState<any>(null);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+  const fetchUserProfile = useCallback(async (token: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/instagram/profile?access_token=${token}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        setUserProfile(data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  }, [API_BASE_URL]);
 
   useEffect(() => {
     // Check URL parameters for access token (if redirected from OAuth)
@@ -18,20 +31,7 @@ const InstagramTestPage: React.FC = () => {
       // Clean URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, []);
-
-  const fetchUserProfile = async (token: string) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/instagram/profile?access_token=${token}`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setUserProfile(data.data);
-      }
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
+  }, [fetchUserProfile]);
 
   const handleLogin = () => {
     // Redirect to Instagram OAuth
@@ -89,7 +89,7 @@ const InstagramTestPage: React.FC = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <InstagramMediaDisplay accessToken={accessToken} />
+          <InstagramMediaDisplay accessToken={accessToken || undefined} />
         </div>
 
         {/* Debug Information */}
@@ -139,14 +139,14 @@ const InstagramTestPage: React.FC = () => {
               <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-mono mr-3">GET</span>
               <div>
                 <span className="font-medium">/auth/instagram/user-media?access_token=TOKEN</span>
-                <p className="text-gray-600">Fetch user's Instagram media</p>
+                <p className="text-gray-600">Fetch user&apos;s Instagram media</p>
               </div>
             </div>
             <div className="flex">
               <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-mono mr-3">GET</span>
               <div>
                 <span className="font-medium">/auth/instagram/profile?access_token=TOKEN</span>
-                <p className="text-gray-600">Fetch user's Instagram profile</p>
+                <p className="text-gray-600">Fetch user&apos;s Instagram profile</p>
               </div>
             </div>
           </div>

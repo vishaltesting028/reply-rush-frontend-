@@ -97,7 +97,7 @@ export default function InstagramOAuthModalFixed({ isOpen, onClose, onSuccess }:
             Connect Instagram Business Account
           </DialogTitle>
           <DialogDescription>
-            Connect your Instagram Business Account using Facebook's secure OAuth authentication.
+            Connect your Instagram Business Account using Facebook&apos;s secure OAuth authentication.
             This method works with existing Facebook apps and supports business features.
           </DialogDescription>
         </DialogHeader>

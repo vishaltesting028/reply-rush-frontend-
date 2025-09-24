@@ -124,7 +124,7 @@ export default function InstagramOAuthModal({ isOpen, onClose, onSuccess }: Inst
             Connect Instagram Account
           </DialogTitle>
           <DialogDescription>
-            Connect your Instagram account using Instagram's secure OAuth authentication.
+            Connect your Instagram account using Instagram&apos;s secure OAuth authentication.
           </DialogDescription>
         </DialogHeader>
 
@@ -137,7 +137,7 @@ export default function InstagramOAuthModal({ isOpen, onClose, onSuccess }: Inst
 
           <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
             <p className="text-sm text-blue-800">
-              <strong>Secure Connection:</strong> You'll be redirected to Instagram's official login page. 
+              <strong>Secure Connection:</strong> You&apos;ll be redirected to Instagram&apos;s official login page. 
               We never see your Instagram password.
             </p>
           </div>

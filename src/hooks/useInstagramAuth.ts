@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 interface InstagramProfile {
@@ -26,29 +26,7 @@ export const useInstagramAuth = (): UseInstagramAuthReturn => {
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-  useEffect(() => {
-    // Check localStorage for stored access token
-    const storedToken = localStorage.getItem('instagram_access_token');
-    if (storedToken) {
-      setAccessToken(storedToken);
-      fetchProfile(storedToken);
-    }
-
-    // Check URL parameters for access token (OAuth callback)
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlToken = urlParams.get('access_token');
-    
-    if (urlToken) {
-      setAccessToken(urlToken);
-      localStorage.setItem('instagram_access_token', urlToken);
-      fetchProfile(urlToken);
-      
-      // Clean URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, []);
-
-  const fetchProfile = async (token?: string) => {
+  const fetchProfile = useCallback(async (token?: string) => {
     const tokenToUse = token || accessToken;
     if (!tokenToUse) return;
 
@@ -76,7 +54,29 @@ export const useInstagramAuth = (): UseInstagramAuthReturn => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [accessToken, API_BASE_URL]);
+
+  useEffect(() => {
+    // Check localStorage for stored access token
+    const storedToken = localStorage.getItem('instagram_access_token');
+    if (storedToken) {
+      setAccessToken(storedToken);
+      fetchProfile(storedToken);
+    }
+
+    // Check URL parameters for access token (OAuth callback)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('access_token');
+    
+    if (urlToken) {
+      setAccessToken(urlToken);
+      localStorage.setItem('instagram_access_token', urlToken);
+      fetchProfile(urlToken);
+      
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [fetchProfile]);
 
   const login = () => {
     window.location.href = `${API_BASE_URL}/auth/instagram`;

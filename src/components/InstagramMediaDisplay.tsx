@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 interface InstagramMedia {
@@ -22,13 +22,7 @@ const InstagramMediaDisplay: React.FC<InstagramMediaDisplayProps> = ({ accessTok
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-  useEffect(() => {
-    if (accessToken) {
-      fetchInstagramMedia();
-    }
-  }, [accessToken]);
-
-  const fetchInstagramMedia = async () => {
+  const fetchInstagramMedia = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -42,13 +36,19 @@ const InstagramMediaDisplay: React.FC<InstagramMediaDisplayProps> = ({ accessTok
       } else {
         setError(response.data.message || 'Failed to fetch media');
       }
-    } catch (err: any) {
-      console.error('Error fetching Instagram media:', err);
-      setError(err.response?.data?.message || 'Failed to fetch Instagram media');
+    } catch (error: any) {
+      console.error('Error fetching Instagram media:', error);
+      setError(error.response?.data?.message || 'Failed to fetch Instagram media');
     } finally {
       setLoading(false);
     }
-  };
+  }, [accessToken, API_BASE_URL]);
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchInstagramMedia();
+    }
+  }, [accessToken, fetchInstagramMedia]);
 
   const loginToInstagram = () => {
     window.location.href = `${API_BASE_URL}/auth/instagram`;
