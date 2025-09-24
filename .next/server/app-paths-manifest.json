@@ -1,0 +1,7 @@
+{
+  "/connect-account/page": "app/connect-account/page.js",
+  "/pricing-plan/page": "app/pricing-plan/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/welcome-openers/page": "app/welcome-openers/page.js"
+}

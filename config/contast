@@ -1,0 +1,4 @@
+export const FRONTEND_URL = 'https://7c0a77c843c9.ngrok-free.app'
+export const API_BASE_URL = 'http://localhost:5000/api';
+
+export const NODE_ENV = import.meta.env.MODE
