@@ -1,19 +1,39 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills.js"
+    "static/chunks/polyfills-42372ed130431b0a.js"
   ],
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/W2RKH31fB7dQyMy_ANaXT/_buildManifest.js",
+    "static/W2RKH31fB7dQyMy_ANaXT/_ssgManifest.js"
   ],
   "rootMainFiles": [
-    "static/chunks/webpack.js",
-    "static/chunks/main-app.js"
+    "static/chunks/webpack-1d8f014f39b70c44.js",
+    "static/chunks/fd9d1056-60b369c71ec3d502.js",
+    "static/chunks/2117-70bb62977b15093d.js",
+    "static/chunks/main-app-2bd3f33d6b6d3b85.js"
   ],
   "pages": {
-    "/_app": []
+    "/_app": [
+      "static/chunks/webpack-1d8f014f39b70c44.js",
+      "static/chunks/framework-25598738ce68d57e.js",
+      "static/chunks/main-9293e49618847f01.js",
+      "static/chunks/pages/_app-78ddf957b9a9b996.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-1d8f014f39b70c44.js",
+      "static/chunks/framework-25598738ce68d57e.js",
+      "static/chunks/main-9293e49618847f01.js",
+      "static/chunks/pages/_error-7ce03bcf1df914ce.js"
+    ],
+    "/instagram-test": [
+      "static/chunks/webpack-1d8f014f39b70c44.js",
+      "static/chunks/framework-25598738ce68d57e.js",
+      "static/chunks/main-9293e49618847f01.js",
+      "static/chunks/6598-3278166e74928c20.js",
+      "static/chunks/pages/instagram-test-4a114442e0b88949.js"
+    ]
   },
   "ampFirstPages": []
 }
